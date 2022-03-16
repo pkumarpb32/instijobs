@@ -1,0 +1,41 @@
+#form-part{
+    background-color:#8BCEDF
+}
+#btn-login{
+    background-color: #EB9354;
+    color: white;
+}
+.divider:after, .divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgb(94, 93, 93);
+}
+#logo-google{
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
+#logo-insti{
+    width: 280px;
+}
+.btn-google {
+    color: #545454;
+    background-color: #ffffffcc;
+    box-shadow: 0 1px 2px 1px #ddd;
+}
+.btn-google img{
+    margin-right: 10px;
+}
+.center-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+::placeholder {
+    color: gray;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
