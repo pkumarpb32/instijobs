@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-2 p-lg-1 text-black">
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="login()"> 
                   <div class="center-content mb-4 pb-1">
                     <i class="fas fa-cubes fa-2x me-3"> <img src="../../assets/img/logo-institut.png" alt=""> </i>
                     <span class="h1 mb-0">Institut Rafael Campalans</span>
@@ -22,28 +22,25 @@
                   <h2 class="fw-normal mb-3 pb-1 mx-4 mx-lg-5" style="letter-spacing: 1px;">Iniciar Sessió</h2>
 
                   <div class="form-outline mb-4 mx-4 mx-lg-5">
-                    <input type="email" id="form2Example17" placeholder="Email....." class="form-control form-control-lg" />
+                    <input type="email" formControlName="email" placeholder="Email....." class="form-control form-control-lg" />
                   </div>
 
                   <div class="form-outline mb-4 mx-4 mx-lg-5">
-                    <input type="password" id="form2Example27" placeholder="Constrasenya....." class="form-control form-control-lg" />
+                    <input type="password" formControlName="password" placeholder="Constrasenya....." class="form-control form-control-lg" />
                   </div>
                   <div class="pt-1 mb-3 center-content">
-                    <button class="btn btn-lg btn-block" id="btn-login" type="button">Inicia la sessió</button>
+                    <button class="btn btn-lg btn-block" id="btn-login" type="submit">Inicia la sessió</button>
                   </div>
                   <a class="small text-muted center-content" href="#!">Heu oblidat la contrasenya?</a>
-                  <p class="pb-1 center-content" style="color: #393f81;">No tens compte? <a class="text-primary" routerLink="sign-up" >Registra't</a></p>
+                  <p class="pb-1 center-content" style="color: #393f81;">No tens compte? <a class="text-primary" routerLink="/sign-up" >Registra't</a></p>
                   <div class="divider d-flex align-items-center mx-4">
                     <p class="text-center fw-bold mx-3 mb-0 text-muted">O</p>
                   </div>
                   <div class="center-content">
                     <a class="btn btn-google btn-lg btn-block" href="#!" role="button">
                       <img src="https://img.icons8.com/color/16/000000/google-logo.png"> Continua amb google </a>
-  
                   </div>
-                 
                 </form>
-
               </div>
             </div>
           </div>
