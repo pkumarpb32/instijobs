@@ -3,3 +3,10 @@
 h2{
     font-family: 'Eczar', serif;
 }
+.btn-main{
+    background-color: #EB9354;
+    color: white;
+}
+.bg-primary-custom{
+    background-color: #8BCEDF;
+}

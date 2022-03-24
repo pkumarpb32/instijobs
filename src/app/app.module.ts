@@ -10,6 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeProfeComponent } from './home-profe/home-profe.component';
 import { HomeAlumneComponent } from './home-alumne/home-alumne.component';
 import { HomeEmpresaComponent } from './home-empresa/home-empresa.component';
+import { HeaderComponent } from './header/header.component';
+import { SearchOfertaComponent } from './search-oferta/search-oferta.component';
+import { SignUpAlumneComponent } from './sign-up-forms/sign-up-alumne/sign-up-alumne.component';
+import { SignUpProfessorComponent } from './sign-up-forms/sign-up-professor/sign-up-professor.component';
+import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-empresa.component';
+import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 
 
 @NgModule({
@@ -19,7 +25,13 @@ import { HomeEmpresaComponent } from './home-empresa/home-empresa.component';
     SignUpComponent,
     HomeProfeComponent,
     HomeAlumneComponent,
-    HomeEmpresaComponent
+    HomeEmpresaComponent,
+    HeaderComponent,
+    SearchOfertaComponent,
+    SignUpAlumneComponent,
+    SignUpProfessorComponent,
+    SignUpEmpresaComponent,
+    LlistaOfertesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,6 @@
 #form-part{
     background-color:#8BCEDF
 }
-#btn-login{
-    background-color: #EB9354;
-    color: white;
-}
 .divider:after, .divider:before {
   content: "";
   flex: 1;
