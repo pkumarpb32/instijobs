@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -15,12 +15,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email:[''],
-      password:['']
+      email:['', Validators.required, Validators.email],
+      password:['', Validators.required]
     }) 
   }
+
+  get f(): {[key: string]: AbstractControl} { // Getter per poder fer f.name en comptes de form.controls.username
+    return this.loginForm.controls;
+  }
+
   // Mèthode per iniciar la sessió
   login(){
+    this.loginForm.markAllAsTouched();
+    if(this.loginForm.invalid){
+      return;
+    }
     this._http.get<any>("http://localhost:3000/api/users").subscribe(res=>{
         const user = res.find((a:any)=>{
           return a.email === this.loginForm.value.email && a.contrasenya === this.loginForm.value.password;
@@ -31,7 +40,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([user.tipus_usuari]);
         }
         else{
-          alert("User not found");
+          this.loginForm.controls['email'].setErrors({invalid: true});
         }
     })
   }

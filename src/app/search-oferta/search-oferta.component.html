@@ -4,13 +4,14 @@
       <form>
         <div class="row">
           <div class="col my-2">
-            <select  class="form-select" searchable="Search here..">
+            <!-- Seleccionar el curs (Search Bar) -->
+            <select  class="form-select">
               <option value="" disabled selected>selecionar el curs</option>
-              <option value="dam">DAM</option>
-              <option value="daw">DAW</option>
+              <option *ngFor="let curs of cursos" [ngValue]="curs.codi">{{curs.nom}}</option>
             </select>
           </div>
           <div class="col-md-auto my-2">
+            <!-- Seleccionar el poble (Search Bar) -->
             <select  class="form-select" searchable="Search here..">
               <option value="" disabled selected>Poble</option>
               <option value="dam">Angles</option>

@@ -16,6 +16,7 @@ import { SignUpAlumneComponent } from './sign-up-forms/sign-up-alumne/sign-up-al
 import { SignUpProfessorComponent } from './sign-up-forms/sign-up-professor/sign-up-professor.component';
 import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-empresa.component';
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.componen
     SignUpAlumneComponent,
     SignUpProfessorComponent,
     SignUpEmpresaComponent,
-    LlistaOfertesComponent
+    LlistaOfertesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

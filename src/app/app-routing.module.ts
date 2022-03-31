@@ -10,18 +10,19 @@ import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-
 import { SignUpProfessorComponent } from './sign-up-forms/sign-up-professor/sign-up-professor.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'alumne', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'sign-up', component: SignUpComponent},
+  {path: 'sign-up', component: SignUpComponent,
+    children:[
+      {path: 'sign-up-alumne', component: SignUpAlumneComponent, outlet: "outlet1"},
+      {path: 'sign-up-professor', component: SignUpProfessorComponent, outlet: "outlet1"},
+      {path: 'sign-up-empresa', component: SignUpEmpresaComponent, outlet: "outlet1" },
+      {path: '', redirectTo: 'sign-up-alumne', pathMatch: 'full'}
+    ]
+  },
   {path: 'alumne', component: HomeAlumneComponent},
   {path: 'profe', component: HomeProfeComponent},
   {path: 'empresa', component: HomeEmpresaComponent},
-  {path: 'sign-up-alumne', component: SignUpAlumneComponent},
-  {path: 'sign-up-professor', component: SignUpProfessorComponent},
-  { path: "sign-up-empresa", component: SignUpEmpresaComponent, outlet: "outlet1" }
-
-
-
+  {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({

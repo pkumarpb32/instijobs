@@ -15,19 +15,23 @@
               <div class="card-body p-2 p-lg-1 text-black">
                 <form [formGroup]="loginForm" (ngSubmit)="login()"> 
                   <div class="center-content mb-4 pb-1">
-                    <i class="fas fa-cubes fa-2x me-3"> <img src="../../assets/img/logo-institut.png" alt=""> </i>
+                    <i class="fa-2x me-3"> <img src="../../assets/img/logo-institut.png" alt=""> </i>
                     <span class="h1 mb-0">Institut Rafael Campalans</span>
                   </div>
-
                   <h2 class="fw-normal mb-3 pb-1 mx-4 mx-lg-5" style="letter-spacing: 1px;">Iniciar Sessió</h2>
 
                   <div class="form-outline mb-4 mx-4 mx-lg-5">
-                    <input type="email" formControlName="email" placeholder="Email....." class="form-control form-control-lg" />
+                    <input type="email" formControlName="email" placeholder="Email....." class="form-control form-control-lg"/>
                   </div>
-
                   <div class="form-outline mb-4 mx-4 mx-lg-5">
                     <input type="password" formControlName="password" placeholder="Constrasenya....." class="form-control form-control-lg" />
                   </div>
+
+                  <div class="text-center mb-4 text-danger" [hidden]="!f['email'].errors?.['invalid']">
+                    Email o contrasenya incorrecta.
+                  </div>
+
+                  
                   <div class="pt-1 mb-3 center-content">
                     <button class="btn btn-lg btn-block btn-main" type="submit">Inicia la sessió</button>
                   </div>
