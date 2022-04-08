@@ -4,7 +4,7 @@ export class Alumne {
     email: string = "";
     telefon:number = -1;
     DNI: string = "";
-    estudis: string = "";
+    estudis: [] = [];
     data_finalitzacio:number = -1;
     tutor_id: number = -1;
     poblacio:string = "";

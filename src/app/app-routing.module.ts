@@ -16,7 +16,7 @@ const routes: Routes = [
       {path: 'sign-up-alumne', component: SignUpAlumneComponent, outlet: "outlet1"},
       {path: 'sign-up-professor', component: SignUpProfessorComponent, outlet: "outlet1"},
       {path: 'sign-up-empresa', component: SignUpEmpresaComponent, outlet: "outlet1" },
-      {path: '', redirectTo: 'sign-up-alumne', pathMatch: 'full'}
+      {path: '', outlet: 'outlet1', component: SignUpAlumneComponent }
     ]
   },
   {path: 'alumne', component: HomeAlumneComponent},
