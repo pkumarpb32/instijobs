@@ -99,7 +99,7 @@
   </div>
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="form3Example1n1">Email</label>
+    <label class="form-label">Email</label>
     <input type="text" formControlName="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="form3Example1n1" class="form-control" />
         <!--  DIV ERROR-->
         <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="text-center p-2 alert-danger">
@@ -118,7 +118,7 @@
         <label class="form-label">Població</label>
         <select formControlName="poblacio" class="select form-control">
           <option disabled>Seleccionar el poble</option>
-          <option *ngFor="let poble of pobles" [ngValue]="poble.id">{{poble.nom}}</option>
+          <option *ngFor="let poble of pobles" [value]="poble.id">{{poble.nom}}</option>
         </select>
         <!--  DIV ERROR-->
         <div *ngIf="f['poblacio'].invalid && (f['poblacio'].dirty || f['poblacio'].touched)" class="text-center p-2 alert-danger">

@@ -5,6 +5,7 @@ import { Poble } from 'src/app/Classes/Poble';
 import { FormBuilder, FormArray, FormControl ,AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { Alumne } from 'src/app/Classes/Alumne';
 import { Observable } from 'rxjs';
+import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-sign-up-alumne',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
 export class SignUpAlumneComponent implements OnInit {
 
   SignUpAlumneForm!: FormGroup;
-  constructor(private _http:HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private _http:HttpClient, private formBuilder: FormBuilder, private dades: DataServiceService) { }
   cursos: Curs[] = [];
   pobles: Poble[] = [];
 
@@ -80,13 +81,23 @@ export class SignUpAlumneComponent implements OnInit {
       return;
     }
     else{
-      alert("DONE");
-      let alum = new Alumne();
+     alert("DONE");
+      let alum : Alumne = new Alumne();
       let current_dades = this.SignUpAlumneForm.value;
-      alum = current_dades;
+
+    // alum = current_dades;
+      alum.nom = current_dades.nom;
+      alum.cognoms = current_dades.cognoms;
+      alum.email = current_dades.email;
+      alum.telefon = current_dades.telefon;
+      alum.DNI = current_dades.DNI;
+      alum.any_finalitzacio = current_dades.any_finalitzacio;
+      alum.poblacio=  current_dades.poblacio;
+
+      this.dades.post('http://localhost:3000/api/registre', alum).subscribe(resposta =>{
       console.log(alum);
-      this.addPerson(alum);
-    }
+      })
+   }
   }
 
   // Funció que retorna els curos seleccionats per l'alumne
@@ -110,20 +121,7 @@ export class SignUpAlumneComponent implements OnInit {
   addPerson(person:Alumne): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(person);
-    console.log(body)
-  //  return this._http.post('http://localhost:3000/api/registre', body,{'headers':headers})
-
-    this._http.post<any>('http://localhost:3000/api/registre', { title: 'Angular POST Request Example' }).subscribe({
-      next: data => {
-       person.nom = data.nom;
-      },
-      error: error => {
-      //    this.errorMessage = error.message;
-          console.error('There was an error!', error);
-      }
-  })
-  return this._http.post('http://localhost:3000/api/registre', body,{'headers':headers})
-
+    return this._http.post('http://localhost:3000/api/registre', body);
   }
   
 }
