@@ -30,18 +30,17 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       return;
     }
-    this._http.get<any>("http://localhost:3000/api/users").subscribe(res=>{
-        const user = res.find((a:any)=>{
-          return a.email === this.loginForm.value.email && a.contrasenya === this.loginForm.value.password;
-        })
-        if(user){
+    this._http.post<any>("http://localhost:3000/api/login", this.loginForm.value).subscribe(res=>{
+        if(res != null){
           alert("Login is Successfull");
           this.loginForm.reset();
-          this.router.navigate([user.tipus_usuari]);
+          this.router.navigate([res[0].tipus_usuari]);
         }
         else{
           this.loginForm.controls['email'].setErrors({invalid: true});
         }
+
+        console.log(res);
     })
   }
 

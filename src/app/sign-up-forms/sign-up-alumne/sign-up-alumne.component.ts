@@ -6,6 +6,7 @@ import { FormBuilder, FormArray, FormControl ,AbstractControl, FormGroup, Valida
 import { Alumne } from 'src/app/Classes/Alumne';
 import { Observable } from 'rxjs';
 import { DataServiceService } from 'src/app/data-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-alumne',
@@ -15,7 +16,7 @@ import { DataServiceService } from 'src/app/data-service.service';
 export class SignUpAlumneComponent implements OnInit {
 
   SignUpAlumneForm!: FormGroup;
-  constructor(private _http:HttpClient, private formBuilder: FormBuilder, private dades: DataServiceService) { }
+  constructor(private router: Router, private _http:HttpClient, private formBuilder: FormBuilder, private dades: DataServiceService) { }
   cursos: Curs[] = [];
   pobles: Poble[] = [];
 
@@ -81,9 +82,9 @@ export class SignUpAlumneComponent implements OnInit {
       return;
     }
     else{
-     alert("DONE");
       let alum : Alumne = new Alumne();
       let current_dades = this.SignUpAlumneForm.value;
+      current_dades.tipus_usuari = "alumne";
 
     // alum = current_dades;
       alum.nom = current_dades.nom;
@@ -94,9 +95,19 @@ export class SignUpAlumneComponent implements OnInit {
       alum.any_finalitzacio = current_dades.any_finalitzacio;
       alum.poblacio=  current_dades.poblacio;
 
-      this.dades.post('http://localhost:3000/api/registre', alum).subscribe(resposta =>{
-      console.log(alum);
-      })
+      this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe(resposta =>{
+      if(resposta === 200){
+        alert("Login Successful!");
+        this.router.navigate(['alumne']);
+      }else if(resposta === 444){
+        alert("Ja existeix un alumne amb aquest DNI!");
+      }
+      else{
+        alert("Email ja existeix!");
+      }
+      console.log(resposta);
+
+      });
    }
   }
 
