@@ -23,8 +23,6 @@
                   <label class="btn btn-secondary" for="option1">Ex-Alumne</label>
                   <input type="radio" [routerLink]="[{outlets:{ outlet1: ['sign-up-empresa'] }}]" class="btn-check" name="options" id="option2" autocomplete="off"/>
                   <label class="btn btn-secondary" for="option2">Empresa</label>
-                  <input type="radio" [routerLink]="[{outlets:{outlet1: ['sign-up-professor'] }}]" class="btn-check" name="options" id="option3" autocomplete="off"/>
-                  <label class="btn btn-secondary" for="option3">Professor</label>
                 </div>
                 <router-outlet  name="outlet1"></router-outlet> 
                 <p class="pb-1 center-content">Ja tens un compte? <a class="text-primary" routerLink="/login" >Entra</a></p>

@@ -13,7 +13,6 @@ import { HomeEmpresaComponent } from './home-empresa/home-empresa.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchOfertaComponent } from './search-oferta/search-oferta.component';
 import { SignUpAlumneComponent } from './sign-up-forms/sign-up-alumne/sign-up-alumne.component';
-import { SignUpProfessorComponent } from './sign-up-forms/sign-up-professor/sign-up-professor.component';
 import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-empresa.component';
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 import { FooterComponent } from './footer/footer.component';
@@ -30,7 +29,6 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     SearchOfertaComponent,
     SignUpAlumneComponent,
-    SignUpProfessorComponent,
     SignUpEmpresaComponent,
     LlistaOfertesComponent,
     FooterComponent

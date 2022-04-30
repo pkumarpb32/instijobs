@@ -1,14 +1,32 @@
-<div class="row">
+<form [formGroup]="SignUpEmpresaForm" (ngSubmit)="onSubmit()">
+  <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-        <label class="form-label" for="form3Example1m">Nom</label>
-        <input type="text" id="form3Example1m" class="form-control form-control-lg" />
-      </div>
+        <label class="form-label">Nom d'Empresa</label>
+        <input type="text" formControlName="nom" class="form-control" />
+        <!--  DIV ERROR-->
+          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="text-center p-2 alert-danger">
+            <div *ngIf="f['nom'].errors?.['required']">
+              El nom és obligatori.
+            </div>
+          </div>
+        <!-- END ERROR-->
+    </div>
     </div>
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-        <label class="form-label" for="form3Example1n">NIF</label>
-        <input type="text" id="form3Example1n" class="form-control form-control-lg" />
+        <label class="form-label">NIF</label>
+        <input type="text" formControlName="DNI" pattern="^(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))$" class="form-control" />
+        <!--  DIV ERROR-->
+        <div *ngIf="f['DNI'].invalid && (f['DNI'].dirty || f['DNI'].touched)" class="text-center p-2 alert-danger">
+          <div *ngIf="f['DNI'].errors?.['required']">
+           Aquest camp és obligatori.
+          </div>
+          <div *ngIf="f['DNI'].errors?.['pattern']">
+            NIF introduït no és vàlid.
+        </div>
+        </div>
+      <!-- END ERROR-->
       </div>
     </div>
   </div>
@@ -16,37 +34,102 @@
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-        <label class="form-label" for="form3Example1m1">Adreça</label>
-        <input type="text" id="form3Example1m1" class="form-control form-control-lg" />
+        <label class="form-label">Contrasenya</label>
+        <input type="password" formControlName="contrasenya" class="form-control" />
+        <!--  DIV ERROR-->
+          <div *ngIf="f['contrasenya'].invalid && (f['contrasenya'].dirty || f['contrasenya'].touched)" class="text-center p-2 alert-danger">
+            <div *ngIf="f['contrasenya'].errors?.['required']">
+              Aquest camp és obligatori.
+            </div>
+            <div *ngIf="f['contrasenya'].errors?.['minlength']">
+              La contrasenya ha de contenir 8 dígits
+            </div>
+          </div>
+        <!-- END ERROR-->
+    </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <label class="form-label">Repertir contrasenya</label>
+        <input type="password" formControlName="recontrasenya" class="form-control" />
+        <!--  DIV ERROR-->
+        <div *ngIf="f['recontrasenya'].invalid && (f['recontrasenya'].dirty || f['recontrasenya'].touched)" class="text-center p-2 alert-danger">
+          <div *ngIf="f['recontrasenya'].errors?.['required']">
+           Aquest camp és obligatori.
+          </div>
+          <div *ngIf="f['recontrasenya'].errors?.['MustMatch']">
+            Ha de ser la mateixa contrasenya.
+           </div>
+        </div>
+      <!-- END ERROR-->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <label class="form-label">Email</label>
+        <input type="text" formControlName="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="form3Example1n1" class="form-control" />
+            <!--  DIV ERROR-->
+            <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="text-center p-2 alert-danger">
+              <div *ngIf="f['email'].errors?.['required']">
+               Aquest camp és obligatori.
+              </div>
+              <div *ngIf="f['email'].errors?.['pattern']">
+                El correu introduït no és vàlid.
+              </div>
+            </div>
+          <!-- END ERROR-->  
       </div>
     </div>
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-        <label class="form-label" for="form3Example1n1">Email</label>
-        <input type="text" id="form3Example1n1" class="form-control form-control-lg" />
+        <label class="form-label">Adreça</label>
+        <input type="text" formControlName="address" class="form-control" />
+            <!--  DIV ERROR-->
+            <div *ngIf="f['address'].invalid && (f['address'].dirty || f['address'].touched)" class="text-center p-2 alert-danger">
+              <div *ngIf="f['address'].errors?.['required']">
+              Aquest camp és obligatori.
+              </div>
+            </div>
+          <!-- END ERROR-->  
       </div>
-    </div>
+      </div>
   </div>
-
   <div class="row">
-    <div class="col-12 mb-4">
+    <div class="col-md-6 mb-4">
       <div class="form-outline">
         <label class="form-label">Població</label>
-        <select class="select form-control form-control-lg">
-          <option value="1">Seleccionar el poble</option>
-          <option value="2">Anglés</option>
-          <option value="3">Girona</option>
-          <option value="4">Salt</option>
+        <select formControlName="poblacio" class="select form-control">
+          <option disabled>Seleccionar el poble</option>
+          <option *ngFor="let poble of dades.pobles" [value]="poble.id">{{poble.nom}}</option>
         </select>
+        <!--  DIV ERROR-->
+        <div *ngIf="f['poblacio'].invalid && (f['poblacio'].dirty || f['poblacio'].touched)" class="text-center p-2 alert-danger">
+          <div *ngIf="f['poblacio'].errors?.['required']">
+           Aquest camp és obligatori.
+          </div>
+        </div>
+      <!-- END ERROR-->
       </div>
     </div>
-  </div>
-
-  <div class="form-outline mb-4">
-    <label class="form-label" for="form3Example9">Telèfon</label>
-    <input type="text" id="form3Example9" class="form-control form-control-lg" />
+    <div class="form-outline col-md-6 mb-4">
+      <label class="form-label">Telèfon</label>
+      <input type="text" formControlName="telefon" pattern="^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$|^(\+34|0034|34)?[ -]*(8|9)[ -]*([0-9][ -]*){8}$" id="form3Example9" class="form-control" />
+        <!--  DIV ERROR-->
+        <div *ngIf="f['telefon'].invalid && (f['telefon'].dirty || f['telefon'].touched)" class="text-center p-2 alert-danger">
+          <div *ngIf="f['telefon'].errors?.['required']">
+           Aquest camp és obligatori.
+          </div>
+          <div *ngIf="f['telefon'].errors?.['pattern']">
+            El telèfon introduït no és vàlid.
+          </div>
+        </div>
+      <!-- END ERROR-->    
+    </div>
   </div>
 
   <div class="d-flex justify-content-center pt-3">
-    <button type="button" class="btn btn-main btn-lg ms-2">Crea el Compte</button>
+    <button type="submit" class="btn btn-main btn-lg ms-2">Crea el compte</button>
   </div>
+  </form>

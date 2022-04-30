@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Curs } from '../Classes/Curs';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
   selector: 'app-search-oferta',
@@ -9,17 +10,10 @@ import { Curs } from '../Classes/Curs';
 })
 export class SearchOfertaComponent implements OnInit {
 
-  constructor(private _http:HttpClient) { }
-  cursos: Curs[] = [];
+  constructor(private _http:HttpClient, public dades : DataServiceService) { }
+  
   ngOnInit(): void {
-    this.getCuros();
+    this.dades.getCuros();
   }
 
-
-  getCuros(): void{
-    this._http.get<any>("http://localhost:3000/api/cursos").subscribe(res=>{
-      this.cursos = res;
-      console.log(res);
-    })
-  }
 }

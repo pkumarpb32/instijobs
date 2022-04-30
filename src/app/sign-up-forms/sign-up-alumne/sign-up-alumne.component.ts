@@ -16,20 +16,19 @@ import { Router } from '@angular/router';
 export class SignUpAlumneComponent implements OnInit {
 
   SignUpAlumneForm!: FormGroup;
-  constructor(private router: Router, private _http:HttpClient, private formBuilder: FormBuilder, private dades: DataServiceService) { }
-  cursos: Curs[] = [];
-  pobles: Poble[] = [];
+  constructor(private router: Router, private _http:HttpClient, private formBuilder: FormBuilder, public dades: DataServiceService) { }
 
   ngOnInit(): void 
   {
+    let date = new Date();
     // recuperar els cursos i els pobles
-    this.getCuros();
-    this.getPobles()
+    this.dades.getCuros();
+    this.dades.getPobles()
     this.SignUpAlumneForm = this.formBuilder.group({
       nom:['', Validators.required],
       cognoms:['', Validators.required],
       DNI:['',  Validators.required],
-      any_finalitzacio:['', Validators.required],
+      any_finalitzacio:['', [Validators.required, Validators.min(1955), Validators.max(date.getFullYear())]],
       email:['', Validators.required],
       poblacio:['', Validators.required],
       telefon:['', Validators.required],
@@ -58,56 +57,31 @@ export class SignUpAlumneComponent implements OnInit {
       }
     }
   }
-  // Funció que retorna els cursos
-  getCuros(): void{
-    this._http.get<any>("http://localhost:3000/api/cursos").subscribe(res=>{
-      this.cursos = res;
-    });
-  }
 
-  // Funció que retorna els pobles
-  getPobles(): void{
-    this._http.get<any>("http://localhost:3000/api/pobles").subscribe(res=>{
-      this.pobles = res;
-    });
-  }
   get f(): {[key: string]: AbstractControl} { // Getter 
     return this.SignUpAlumneForm.controls;
   }
 
   // Funció per guardar les dades d'un alumne a la base de dades
-  onSubmit(){
+  onSubmit()
+  {
     this.SignUpAlumneForm.markAllAsTouched();
     if(this.SignUpAlumneForm.invalid){
       return;
     }
     else{
-      let alum : Alumne = new Alumne();
       let current_dades = this.SignUpAlumneForm.value;
-      current_dades.tipus_usuari = "alumne";
-
-    // alum = current_dades;
-      alum.nom = current_dades.nom;
-      alum.cognoms = current_dades.cognoms;
-      alum.email = current_dades.email;
-      alum.telefon = current_dades.telefon;
-      alum.DNI = current_dades.DNI;
-      alum.any_finalitzacio = current_dades.any_finalitzacio;
-      alum.poblacio=  current_dades.poblacio;
-
-      this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe(resposta =>{
-      if(resposta === 200){
+      current_dades['tipus_usuari'] = "alumne";
+      this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
+        this.dades.saveToken(resposta.dataUser.accessToken, resposta.dataUser.expiresIn);
         alert("Login Successful!");
         this.router.navigate(['alumne']);
-      }else if(resposta === 444){
-        alert("Ja existeix un alumne amb aquest DNI!");
-      }
-      else{
-        alert("Email ja existeix!");
-      }
-      console.log(resposta);
-
-      });
+        },
+        (error) => {                              //Error
+          console.error(error.error)
+          alert(error.error);
+        }
+      );
    }
   }
 
@@ -126,13 +100,5 @@ export class SignUpAlumneComponent implements OnInit {
         i++;
       });
     }
-  }
-  
-  // Funció per afegir un alumne a la base de dades
-  addPerson(person:Alumne): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(person);
-    return this._http.post('http://localhost:3000/api/registre', body);
-  }
-  
+  }  
 }

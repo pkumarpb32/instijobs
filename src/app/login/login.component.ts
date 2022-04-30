@@ -28,20 +28,20 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginForm.markAllAsTouched();
     if(this.loginForm.invalid){
+      this.loginForm.controls['email'].setErrors({invalid: true});
       return;
     }
     this._http.post<any>("http://localhost:3000/api/login", this.loginForm.value).subscribe(res=>{
         if(res != null){
           alert("Login is Successfull");
           this.loginForm.reset();
-          this.router.navigate([res[0].tipus_usuari]);
+          // this.router.navigate([res[0].tipus_usuari]);
+          console.log(res);
         }
         else{
           this.loginForm.controls['email'].setErrors({invalid: true});
         }
-
-        console.log(res);
-    })
+    });
   }
 
 }

@@ -7,7 +7,7 @@
             <!-- Seleccionar el curs (Search Bar) -->
             <select  class="form-select">
               <option value="" disabled selected>selecionar el curs</option>
-              <option *ngFor="let curs of cursos" [ngValue]="curs.codi">{{curs.nom}}</option>
+              <option *ngFor="let curs of dades.cursos" [ngValue]="curs.codi">{{curs.nom}}</option>
             </select>
           </div>
           <div class="col-md-auto my-2">
