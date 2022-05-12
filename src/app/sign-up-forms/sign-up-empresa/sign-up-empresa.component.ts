@@ -65,8 +65,8 @@ export class SignUpEmpresaComponent implements OnInit {
       let current_dades = this.SignUpEmpresaForm.value;
       current_dades['tipus_usuari'] = "empresa";
       this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
-        this.dades.saveToken(resposta.dataUser.accessToken, resposta.dataUser.expiresIn);
-        alert("Login Successful!");
+        this.dades.saveToken(resposta.dataUser.accessToken);
+        alert("Sign Up Successful!");
         this.router.navigate(['empresa']);
         },
         (error) => {                              //Error

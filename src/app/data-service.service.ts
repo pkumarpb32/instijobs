@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, map } from 'rxjs';
 import { Curs } from './Classes/Curs';
 import { JwtResponseI } from './Classes/JwtResponseI';
 import { Poble } from './Classes/Poble';
@@ -10,7 +10,8 @@ import { Poble } from './Classes/Poble';
 })
 export class DataServiceService {
   authSubject = new BehaviorSubject(false);
-  private token: string = "";
+  private token = " ";
+  public role = " ";
 
   constructor(private _http: HttpClient) { }
   cursos: Curs [] = [];
@@ -23,11 +24,16 @@ export class DataServiceService {
     }
   }
 
+  verifyToken():Observable<any> {{
+    return this._http.get(this.url + "/user");
+    }
+  }
+
   getCuros(): void{
     this._http.get<Curs[]>(this.url + "/cursos").subscribe((res: Curs[])=>{
       this.cursos = res;
       console.log(res);
-    })
+    });
   }
 
   getPobles(): void{
@@ -37,23 +43,38 @@ export class DataServiceService {
   }
 
   logout(): void {
-    this.token = '';
+    this.token = " ";
     localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
+   // localStorage.removeItem("EXPIRES_IN");
   }
 
-  saveToken(token: string, expiresIn: string): void {
-    localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("EXPIRES_IN", expiresIn);
+  saveToken(token: string): void {
+    localStorage.setItem("ACCESS_TOKEN", JSON.stringify(token));
     this.token = token;
   }
 
   getToken(): string {
-    if (!this.token) {
+    if (this.token = " ") {
       this.token = JSON.parse(localStorage.getItem('ACCESS_TOKEN') || '{}');
+      return this.token;
     }
+    console.log(this.token);
+
     return this.token;
   }
 
-  
+// verifyRole(role:string): Observable<boolean>
+//   {
+//    return this._http.get<any>(this.url + "/user") .pipe(
+//       map((data) => {
+//           if(data.dataUser.tipus_usuari === role){
+//             return true;
+            
+//           }
+//            return false;       
+//       }));
+//     // console.log(false);
+// }
+
+
 }

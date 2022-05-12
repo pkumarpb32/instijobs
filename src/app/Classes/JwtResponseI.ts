@@ -1,8 +1,8 @@
 export interface JwtResponseI {
     dataUser: {
       email: string,
-      accessToken: string,
-      expiresIn: string
+      tipus_usuari: string,
+      accessToken: string
     }
   }
   

@@ -73,7 +73,7 @@ export class SignUpAlumneComponent implements OnInit {
       let current_dades = this.SignUpAlumneForm.value;
       current_dades['tipus_usuari'] = "alumne";
       this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
-        this.dades.saveToken(resposta.dataUser.accessToken, resposta.dataUser.expiresIn);
+        this.dades.saveToken(resposta.dataUser.accessToken);
         alert("Login Successful!");
         this.router.navigate(['alumne']);
         },

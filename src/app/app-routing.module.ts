@@ -7,7 +7,8 @@ import { HomeEmpresaComponent } from './home-empresa/home-empresa.component';
 import { HomeProfeComponent } from './home-profe/home-profe.component';
 import { SignUpAlumneComponent } from './sign-up-forms/sign-up-alumne/sign-up-alumne.component';
 import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-empresa.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent,
@@ -17,9 +18,9 @@ const routes: Routes = [
       {path: '', outlet: 'outlet1', component: SignUpAlumneComponent }
     ]
   },
-  {path: 'alumne', component: HomeAlumneComponent},
-  {path: 'profe', component: HomeProfeComponent},
-  {path: 'empresa', component: HomeEmpresaComponent},
+  {path: 'alumne', component: HomeAlumneComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'alumne'}},
+  {path: 'profe', component: HomeProfeComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'profe'}},
+  {path: 'empresa', component: HomeEmpresaComponent, canActivate:[AuthGuard, RoleGuard], data:{expectedRole: 'empresa'}},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

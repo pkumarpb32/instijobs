@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeProfeComponent } from './home-profe/home-profe.component';
 import { HomeAlumneComponent } from './home-alumne/home-alumne.component';
 import { HomeEmpresaComponent } from './home-empresa/home-empresa.component';
@@ -16,6 +16,7 @@ import { SignUpAlumneComponent } from './sign-up-forms/sign-up-alumne/sign-up-al
 import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-empresa.component';
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
 
 
 @NgModule({
@@ -41,7 +42,13 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
