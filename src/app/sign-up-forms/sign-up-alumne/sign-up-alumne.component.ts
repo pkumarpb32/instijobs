@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormArray, FormControl ,AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { DataServiceService } from 'src/app/data-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-alumne',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignUpAlumneComponent implements OnInit {
 
   SignUpAlumneForm!: FormGroup;
-  constructor(private router: Router, private _http:HttpClient, private formBuilder: FormBuilder, public dades: DataServiceService) { }
+  constructor(private router: Router, private _http:HttpClient, private formBuilder: FormBuilder, public dades: DataServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void 
   {
@@ -69,9 +69,8 @@ export class SignUpAlumneComponent implements OnInit {
       let current_dades = this.SignUpAlumneForm.value;
       current_dades['tipus_usuari'] = "alumne";
       this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
-        this.dades.saveToken(resposta.dataUser.accessToken);
-        alert("Login Successful!");
-        this.router.navigate(['alumne']);
+        this.dades.email = current_dades['email'];
+        this.router.navigate([{outlets: {outlet1:['confirm-email']}}], {relativeTo: this.route.parent});
         },
         (error) => {                              //Error
           console.error(error.error)

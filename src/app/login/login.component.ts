@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginForm.markAllAsTouched();
     if(this.loginForm.invalid){
-      this.loginForm.controls['email'].setErrors({invalid: true});
+      this.loginForm.controls['password'].setErrors({invalid: true});
       return;
     }
     this.dades.post("http://localhost:3000/api/login", this.loginForm.value).subscribe(res=>{
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
 
           }
           else if(error.status === 401){
-            this.loginForm.controls['email'].setErrors({invalid: true});
+            this.loginForm.controls['password'].setErrors({invalid: true});
           }
       }
     );

@@ -73,8 +73,12 @@ export class DataServiceService {
     return this.token;
   }
 // Mètode per canviar la contrasenya
- changePassword(body : any){
-  return this._http.put<any>(this.url + "/login/canviarpass", body);
+ sendConfirmationMail(body : any){
+  return this._http.post<any>(this.url + "/login/canviarpass", body);
  }
 
+ // Mètode per canviar la contrasenya
+ changePassword(body : any):Observable<JwtResponseI>{
+  return this._http.put<JwtResponseI>(this.url + "/login/canviarpass/password", body);
+ }
 }

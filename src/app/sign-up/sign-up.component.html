@@ -19,12 +19,12 @@
                   <span class="h1 mt-sm-2 mt-md-4 mt-lg-2 mb-0">Institut Rafael Campalans</span>
                 </div>
                 <div class="btn-group mx-4 mx-lg-5 my-3 center-content">
-                  <input type="radio" [routerLink]="[{outlets:{ outlet1: ['sign-up-alumne'] }}]" class="btn-check" name="options" id="option1" autocomplete="off" checked/> 
+                  <input type="radio" [disabled]="dades.email != ' '" [routerLink]="[{outlets:{ outlet1: ['sign-up-alumne'] }}]" class="btn-check" name="options" id="option1" autocomplete="off" checked/> 
                   <label class="btn btn-secondary" for="option1">Ex-Alumne</label>
-                  <input type="radio" [routerLink]="[{outlets:{ outlet1: ['sign-up-empresa'] }}]" class="btn-check" name="options" id="option2" autocomplete="off"/>
+                  <input type="radio" [disabled]="dades.email != ' '" [routerLink]="[{outlets:{ outlet1: ['sign-up-empresa'] }}]" class="btn-check" name="options" id="option2" autocomplete="off"/>
                   <label class="btn btn-secondary" for="option2">Empresa</label>
                 </div>
-                <router-outlet  name="outlet1"></router-outlet> 
+                <router-outlet name="outlet1"></router-outlet> 
                 <p class="pb-1 center-content">Ja tens un compte? <a class="text-primary" routerLink="/login" >Entra</a></p>
               </div>
             </div>

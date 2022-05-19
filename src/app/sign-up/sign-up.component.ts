@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,8 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
-  constructor(private router:Router) { }
+  // initially set to false
+  isEnabled: boolean = false;
+  constructor(private router:Router, public dades: DataServiceService) { }
 
   ngOnInit(): void {
   }

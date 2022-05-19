@@ -49,24 +49,38 @@ export class CanviarContrasenyaComponent implements OnInit {
     return this.ChangePwdForm.controls;
   }
 
-  onSubmit(){
+  onSubmit()
+  {
     this.ChangePwdForm.markAllAsTouched();
     if(this.ChangePwdForm.invalid){
       return;
     }else{
       if(this.element){
-        this.dades.changePassword(this.ChangePwdForm.value).subscribe(res=>{
-          console.log(res);
+        console.log(this.ChangePwdForm.value);
+        const body = {
+          email: this.ChangePwdForm.value['email'],
+          contrasenya: this.ChangePwdForm.value['constrasenya']
+        }
+        this.dades.sendConfirmationMail(body).subscribe((res)=>{
+          console.log(res)
           this.element = false;
         },
         (error)=>{
+           console.log(error)
           alert(error.error);
         });
       }
       else{
-        this.element = true;
-        this.ChangePwdForm.controls['confirm_code'].setErrors({invalid: true});
-
+        //  this.element = true;
+        this.dades.changePassword(this.ChangePwdForm.value).subscribe(res=>{
+          this.dades.saveToken(res.dataUser.accessToken);
+          alert("Constrasenya Canviada");
+          this.router.navigate([res.dataUser.tipus_usuari]);
+        },
+        (error)=>{
+          this.ChangePwdForm.controls['codi_activacio'].setErrors({invalid: true});
+          alert(error.error);
+        });
       }
     }
   }

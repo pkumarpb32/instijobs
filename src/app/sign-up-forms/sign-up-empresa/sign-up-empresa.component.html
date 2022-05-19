@@ -16,13 +16,14 @@
     <div class="col-md-6 mb-4">
       <div class="form-outline">
         <label class="form-label">NIF</label>
-        <input type="text" formControlName="DNI" pattern="^(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))$" class="form-control" />
+        <!-- pattern="^(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))$ -->
+        <input type="text" formControlName="DNI" pattern="(^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$)|(^[XYZ]\d{7,8}[A-Z]$)" class="form-control" />
         <!--  DIV ERROR-->
         <div *ngIf="f['DNI'].invalid && (f['DNI'].dirty || f['DNI'].touched)" class="text-center p-2 alert-danger">
           <div *ngIf="f['DNI'].errors?.['required']">
            Aquest camp és obligatori.
           </div>
-          <div *ngIf="f['DNI'].errors?.['pattern']">
+          <div *ngIf="f['DNI'].errors?.['pattern'] || f['DNI'].errors?.['maxlength']">
             NIF introduït no és vàlid.
         </div>
         </div>

@@ -19,7 +19,7 @@ export class SignUpEmpresaComponent implements OnInit {
     this.dades.getPobles();
     this.SignUpEmpresaForm = this.formBuilder.group({
       nom:['', Validators.required],
-      DNI:['',  Validators.required],
+      DNI:['',  [Validators.required, Validators.maxLength(10)]],
       email:['', Validators.required],
       poblacio:['', Validators.required],
       telefon:['', Validators.required],
@@ -65,7 +65,6 @@ export class SignUpEmpresaComponent implements OnInit {
       let current_dades = this.SignUpEmpresaForm.value;
       current_dades['tipus_usuari'] = "empresa";
       this.dades.signUp('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
-        console.log(resposta['dataUser']);
         this.dades.email = current_dades['email'];
         this.router.navigate([{outlets: {outlet1:['confirm-email']}}], {relativeTo: this.route.parent});
         },
