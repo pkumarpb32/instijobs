@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, AbstractControl,FormBuilder} from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { DataServiceService } from 'src/app/data-service.service';
 export class SignUpEmpresaComponent implements OnInit {
 
   SignUpEmpresaForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private _http: HttpClient, public dades: DataServiceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private _http: HttpClient, public dades: DataServiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // obtenir els pobles
@@ -64,10 +64,10 @@ export class SignUpEmpresaComponent implements OnInit {
     else{
       let current_dades = this.SignUpEmpresaForm.value;
       current_dades['tipus_usuari'] = "empresa";
-      this.dades.post('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
-        this.dades.saveToken(resposta.dataUser.accessToken);
-        alert("Sign Up Successful!");
-        this.router.navigate(['empresa']);
+      this.dades.signUp('http://localhost:3000/api/registre', current_dades).subscribe((resposta) =>{
+        console.log(resposta['dataUser']);
+        this.dades.email = current_dades['email'];
+        this.router.navigate([{outlets: {outlet1:['confirm-email']}}], {relativeTo: this.route.parent});
         },
         (error) => {                              //Error
           console.error(error.error)

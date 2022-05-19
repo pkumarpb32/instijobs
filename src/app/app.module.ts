@@ -17,6 +17,8 @@ import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { ConfirmEmailComponent } from './sign-up-forms/confirm-email/confirm-email.component';
+import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contrasenya.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
     SignUpAlumneComponent,
     SignUpEmpresaComponent,
     LlistaOfertesComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmEmailComponent,
+    CanviarContrasenyaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,93 @@
+<section class="vh-100" id="form-part">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img
+                  src="../../assets/img/library.jpg"
+                  alt="login form"
+                  class="img-fluid" style="border-radius: 1rem 0 0 1rem;"
+                />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-2 p-lg-1 text-black">
+                  <form [formGroup]="ChangePwdForm" (ngSubmit)="onSubmit()"> 
+                    <div class="center-content mb-4 pb-1">
+                      <i class="fa-2x me-3"> <img src="../../assets/img/logo-institut.png" alt=""> </i>
+                      <span class="h1 mb-0">Institut Rafael Campalans</span>
+                    </div>
+                    <div *ngIf="element == true">
+                      <h2 class="fw-normal mb-3 pb-1 mx-4 mx-lg-5" style="letter-spacing: 1px;">Canviar Contrasenya</h2>
+                      <div class="form-outline mb-4 mx-4 mx-lg-5">
+                        <input type="email" formControlName="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email....." class="form-control form-control-lg"/>
+                        <!--  DIV ERROR-->
+                        <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="text-center p-2 alert-danger">
+                          <div *ngIf="f['email'].errors?.['required']">
+                            Aquest camp és obligatori.
+                          </div>
+                        <div *ngIf="f['email'].errors?.['pattern']">
+                          El correu introduït no és vàlid.
+                        </div>
+                      </div>
+                      <!-- END ERROR--> 
+                      </div>
+                      <div class="form-outline mb-4 mx-4 mx-lg-5">
+                      <input type="password" formControlName="contrasenya" placeholder="Constrasenya....." class="form-control form-control-lg" />
+                        <!--  DIV ERROR-->
+                        <div *ngIf="f['contrasenya'].invalid && (f['contrasenya'].dirty || f['contrasenya'].touched)" class="text-center p-2 alert-danger">
+                            <div *ngIf="f['contrasenya'].errors?.['required']">
+                            Aquest camp és obligatori.
+                            </div>
+                            <div *ngIf="f['contrasenya'].errors?.['minlength']">
+                            La contrasenya ha de contenir 8 dígits
+                            </div>
+                        </div>
+                      <!-- END ERROR-->
+                      </div>
+
+                      <div class="form-outline mb-4 mx-4 mx-lg-5">
+                          <input type="password" formControlName="recontrasenya" placeholder="Constrasenya....." class="form-control form-control-lg" />
+                            <!--  DIV ERROR-->
+                            <div *ngIf="f['recontrasenya'].invalid && (f['recontrasenya'].dirty || f['recontrasenya'].touched)" class="text-center p-2 alert-danger">
+                                <div *ngIf="f['recontrasenya'].errors?.['required']">
+                                Aquest camp és obligatori.
+                                </div>
+                                <div *ngIf="f['recontrasenya'].errors?.['MustMatch']">
+                                  Ha de ser la mateixa contrasenya.
+                                </div>
+                            </div>
+                        <!-- END ERROR-->
+                      </div>   
+                    </div>
+                    <div *ngIf="element == false">
+                      <h2 class="text-center mx-4">Hem enviat un codi de confirmació al teu correu electrònic</h2>
+                      <div class="form-outline mb-4 mx-4 mx-lg-5">
+                        <input type="number" formControlName="codi_activacio" placeholder="Entri el codi......" class="form-control w-md-25 form-control-lg" />
+                          <!--  DIV ERROR-->
+                          <div *ngIf="f['codi_activacio'].invalid && (f['codi_activacio'].dirty || f['codi_activacio'].touched)" class="text-center p-2 alert-danger">
+                              <div *ngIf="f['codi_activacio'].errors?.['required']">
+                              Aquest camp és obligatori.
+                              </div>
+                              <div *ngIf="f['confirm_code'].errors?.['invalid']">
+                                El codi introduït no és correcta.
+                              </div>
+                          </div>
+                      <!-- END ERROR-->
+                    </div>   
+                    </div>
+                    <div class="pt-1 mb-3 center-content">
+                      <button class="btn btn-lg btn-block btn-main" type="submit">Canviar Contrasenya</button>
+                    </div>
+                    <p class="pb-1 center-content">Ja tens un compte? <a class="text-primary" routerLink="/login" >Entra</a></p>
+                    <p class="pb-1 center-content" style="color: #393f81;">No tens compte? <a class="text-primary" routerLink="/sign-up" >Registra't</a></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -44,17 +44,27 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.dades.post("http://localhost:3000/api/login", this.loginForm.value).subscribe(res=>{
-        if(res != null){
+        if(res.dataUser != null){
           this.dades.saveToken(res.dataUser.accessToken);
           alert("Login is Successfull");
           this.loginForm.reset();
           this.router.navigate([res.dataUser.tipus_usuari]);
-          console.log(res.dataUser);
         }
-        else{
-          this.loginForm.controls['email'].setErrors({invalid: true});
-        }
-    });
+    },
+      (error)=>{
+          console.log(error);
+          if(error.status === 403){
+            alert(error.error);
+            // this.router.navigate(["sign-up/(outlet1:confirm-email)"]);
+            this.dades.email = this.loginForm.value['email'];
+            this.router.navigate(["sign-up",{outlets: {outlet1:['confirm-email']}}]);
+
+          }
+          else if(error.status === 401){
+            this.loginForm.controls['email'].setErrors({invalid: true});
+          }
+      }
+    );
   }
 
 }

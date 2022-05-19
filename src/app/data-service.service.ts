@@ -11,7 +11,7 @@ import { Poble } from './Classes/Poble';
 export class DataServiceService {
   authSubject = new BehaviorSubject(false);
   private token = " ";
-  public role = " ";
+  public email = " ";
 
   constructor(private _http: HttpClient) { }
   cursos: Curs [] = [];
@@ -19,8 +19,15 @@ export class DataServiceService {
   url: string = "http://localhost:3000/api";
   
 
+  // Mètode per fer login
   post(url:string, body:any):Observable<JwtResponseI> {{
     return this._http.post<JwtResponseI>(url, body);
+    }
+  }
+
+    // Mètode per crear un compte nou
+  signUp(url:string, body:any):Observable<any> {{
+    return this._http.post<any>(url, body);
     }
   }
 
@@ -29,10 +36,13 @@ export class DataServiceService {
     }
   }
 
+  activateAccount(body : any):Observable<JwtResponseI>{
+    return this._http.put<JwtResponseI>(this.url + "/registre/confirmacio", body);
+  }
+
   getCuros(): void{
     this._http.get<Curs[]>(this.url + "/cursos").subscribe((res: Curs[])=>{
       this.cursos = res;
-      console.log(res);
     });
   }
 
@@ -62,19 +72,9 @@ export class DataServiceService {
 
     return this.token;
   }
-
-// verifyRole(role:string): Observable<boolean>
-//   {
-//    return this._http.get<any>(this.url + "/user") .pipe(
-//       map((data) => {
-//           if(data.dataUser.tipus_usuari === role){
-//             return true;
-            
-//           }
-//            return false;       
-//       }));
-//     // console.log(false);
-// }
-
+// Mètode per canviar la contrasenya
+ changePassword(body : any){
+  return this._http.put<any>(this.url + "/login/canviarpass", body);
+ }
 
 }

@@ -1,0 +1,22 @@
+<div class="container">
+    <h2 class="text-center mt-5">Hem enviat un codi de confirmació al teu correu electrònic</h2>
+    <div class="d-flex justify-content-center">
+        <form [formGroup]="ConfirmEmailForm" (ngSubmit)="onSubmit()" class="text-center">
+            <div class="form-group">
+                <label class="form-label">Entri el codi:</label>
+                <input formControlName="confirm_code" type="number" class="form-control" />
+                <!--  DIV ERROR-->
+                <div *ngIf="f['confirm_code'].invalid && (f['confirm_code'].dirty || f['confirm_code'].touched)" class="text-center p-2 alert-danger">
+                    <div *ngIf="f['confirm_code'].errors?.['required']">
+                        Entri el codi, si us plau!.
+                    </div>
+                    <div *ngIf="f['confirm_code'].errors?.['invalid']">
+                        El codi introduït no és correcta.
+                      </div>
+                </div>
+                <!-- END ERROR-->
+            </div>  
+            <button type="submit" class="btn btn-main mt-3 ms-2">Confirmar</button>
+        </form>
+    </div>
+</div>

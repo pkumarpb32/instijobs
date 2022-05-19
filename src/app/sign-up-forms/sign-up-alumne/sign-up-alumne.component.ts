@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Curs } from 'src/app/Classes/Curs';
 import { HttpClient } from '@angular/common/http';
-import { Poble } from 'src/app/Classes/Poble';
 import { FormBuilder, FormArray, FormControl ,AbstractControl, FormGroup, Validators } from '@angular/forms';
-import { Alumne } from 'src/app/Classes/Alumne';
-import { Observable } from 'rxjs';
 import { DataServiceService } from 'src/app/data-service.service';
 import { Router } from '@angular/router';
 
