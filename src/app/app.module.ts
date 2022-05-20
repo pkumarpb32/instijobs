@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { ConfirmEmailComponent } from './sign-up-forms/confirm-email/confirm-email.component';
 import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contrasenya.component';
+import { CrearOfertaComponent } from './components-empresa/crear-oferta/crear-oferta.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contr
     LlistaOfertesComponent,
     FooterComponent,
     ConfirmEmailComponent,
-    CanviarContrasenyaComponent
+    CanviarContrasenyaComponent,
+    CrearOfertaComponent
   ],
   imports: [
     BrowserModule,

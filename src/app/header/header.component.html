@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+    <a class="navbar-brand me-2" routerLink="/empresa">
       <img
         src="../../assets/img/logo.png"
         height="70"
@@ -14,8 +14,9 @@
     </a>
 
     <div>
-        <button class="btn btn-md btn-block btn-main">FCT</button>
-        <button class="btn btn-md btn-block mx-4 btn-main">Editar Perfil</button>
+      <button *ngIf="dades.role === 'empresa'" [routerLink]="[{outlets:{ 'outlet-empresa': ['crear-oferta'] }}]" class="btn btn-md btn-block btn-main">Crear Oferta</button>
+        <button *ngIf="dades.role === 'alumne'" class="btn btn-md btn-block btn-main">FCT</button>
+        <button class="btn btn-md btn-block my-3 mx-2 mx-sm-4 btn-main">Editar Perfil</button>
         <button class="btn btn-md btn-block btn-main" (click)="logOut()">LogOut</button>
 
     </div>
