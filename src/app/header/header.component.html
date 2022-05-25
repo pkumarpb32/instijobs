@@ -1,26 +1,39 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-  <!-- Container wrapper -->
-  <div class="container">
-    <!-- Navbar brand -->
-    <a class="navbar-brand me-2" routerLink="/empresa">
-      <img
-        src="../../assets/img/logo.png"
-        height="70"
-        alt="MDB Logo"
-        loading="lazy"
-        style="margin-top: -1px;"
-      />
-    </a>
+<div class="bg-light border-bottom">
+  <nav class="navbar navbar-expand-sm navbar-light mx-2 mx-md-5">
+      <a class="navbar-brand" href="#">
+          <img src="../../assets/img/logo.png" alt="Bootstrap" height="70" class="d-inline-block align-top">
+          <span class="hidden">Bootstrap</span>
+        </a>
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#toggleMobileMenu" 
+        aria-controls="toggleMobileMenu" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="toggleMobileMenu">
+      
+          <ul class="navbar-nav ms-auto text-center">
+              <li *ngIf="dades.role === 'empresa'">
+                <a class="nav-link custom-nav-link" [routerLink]="[{outlets:{ 'outlet-empresa': ['crear-oferta'] }}]">Crear Oferta</a>
+            </li>
+              <li *ngIf="dades.role === 'alumne'">
+                  <a class="nav-link custom-nav-link" href="#">FCT</a>
+              </li>
+              <li>
+                  <a class="nav-link custom-nav-link" href="#">Editar Perfil</a>
+              </li>
+              <li class="mx-md  -4">
+                  <a class="btn btn-primary" (click)="logOut()">Tancar Sesió</a>
+              </li>
+          </ul>
+          
 
-    <div>
-      <button *ngIf="dades.role === 'empresa'" [routerLink]="[{outlets:{ 'outlet-empresa': ['crear-oferta'] }}]" class="btn btn-md btn-block btn-main">Crear Oferta</button>
-        <button *ngIf="dades.role === 'alumne'" class="btn btn-md btn-block btn-main">FCT</button>
-        <button class="btn btn-md btn-block my-3 mx-2 mx-sm-4 btn-main">Editar Perfil</button>
-        <button class="btn btn-md btn-block btn-main" (click)="logOut()">LogOut</button>
-
-    </div>
-  </div>
-  <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
+      </div>
+  </nav>
+</div>

@@ -33,6 +33,7 @@ export class ConfirmEmailComponent implements OnInit {
       this.dades.activateAccount(body).subscribe(res =>{
         this.dades.saveToken(res.dataUser.accessToken);
         alert("Sign-up is Successfull");
+        this.dades.email = " ";
         this.router.navigate([res.dataUser.tipus_usuari]);
       },
       (error) => {                              //Error

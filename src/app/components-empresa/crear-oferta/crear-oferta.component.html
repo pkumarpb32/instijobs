@@ -1,5 +1,5 @@
 <h1 class="text-center my-3">Crear Oferta!</h1>
-  <form [formGroup]="CrearOfertaForm" class="mx-5">
+  <form [formGroup]="CrearOfertaForm" (ngSubmit)="onSubmit()" class="mx-5">
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-outline">
@@ -17,7 +17,11 @@
       <div class="col-md-6 mb-4">
         <div class="form-outline">
           <label class="form-label">Tipus</label>
-          <input type="text" formControlName="tipus" class="form-control" />
+          <select (change)="onChange($event)" formControlName="tipus" class="form-control">
+            <option value="" selected disabled>Seleccionar el tipus de Oferta.....</option>
+            <option value="fct">FCT</option>
+            <option value="treball">Treball</option>
+          </select>
           <!--  DIV ERROR-->
           <div *ngIf="f['tipus'].invalid && (f['tipus'].dirty || f['tipus'].touched)" class="text-center p-2 alert-danger">
             <div *ngIf="f['tipus'].errors?.['required']">
@@ -28,38 +32,22 @@
         </div>
       </div>
     </div>
-  
+
     <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="form-outline">
-          <label class="form-label">Descripció</label>
-          <input type="text" formControlName="descripcio" class="form-control" />
+        <div class="form-group col mb-4">
+        <label>Descripció</label>
+        <textarea class="form-control" formControlName="descripcio" rows="5"></textarea>
           <!--  DIV ERROR-->
-            <div *ngIf="f['descripcio'].invalid && (f['descripcio'].dirty || f['descripcio'].touched)" class="text-center p-2 alert-danger">
-              <div *ngIf="f['descripcio'].errors?.['required']">
-                Aquest camp és obligatori.
-              </div>
-            </div>
-          <!-- END ERROR-->
-      </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="form-outline">
-          <label class="form-label">Teletreball</label>
-          <input type="password" formControlName="teletreball" class="form-control" />
-          <!--  DIV ERROR-->
-          <div *ngIf="f['teletreball'].invalid && (f['teletreball'].dirty || f['teletreball'].touched)" class="text-center p-2 alert-danger">
-            <div *ngIf="f['teletreball'].errors?.['required']">
-             Aquest camp és obligatori.
+          <div *ngIf="f['descripcio'].invalid && (f['descripcio'].dirty || f['descripcio'].touched)" class="text-center p-2 alert-danger">
+            <div *ngIf="f['descripcio'].errors?.['required']">
+              Aquest camp és obligatori.
             </div>
           </div>
         <!-- END ERROR-->
         </div>
       </div>
-    </div>
-  
     <div class="row">
-      <div class="col-md-6 mb-4">
+      <div [hidden]="f['tipus'].value === 'fct'" class="col-md-6 mb-4">
         <div class="form-outline">
           <label class="form-label">Salari</label>
           <input type="text" formControlName="salari" class="form-control" />
@@ -72,7 +60,7 @@
         <!-- END ERROR-->
         </div>
       </div>
-      <div class="col-md-6 mb-4">
+      <div [hidden]="f['tipus'].value === 'fct'" class="col-md-6 mb-4">
         <div class="form-outline">
           <label class="form-label">Horari</label>
           <input type="text" formControlName="horari" class="form-control" />
@@ -88,22 +76,36 @@
     </div>
   
     <div class="row">
-      <div class="col-md-6 mb-4">
+      <div [hidden]="f['tipus'].value === 'fct'" class="col-md-6 mb-4">
         <div class="form-outline">
             <label class="form-label">Tipus de Contracte</label>
-            <input type="text" formControlName="tipus_contracte" class="form-control" />
+            <select formControlName="tipus_contracte" class="form-control">
+              <option seleceted disabled value="">Seleccionar el tipus de Contracte.....</option>
+              <option value="Indefinit">Indefinit</option>
+              <option value="Temporal">Temporal</option>
+            </select>
                 <!--  DIV ERROR-->
-                <div *ngIf="f['tipus_contracte'].invalid && (f['tipus_contracte'].dirty || f['tipus_contracte'].touched)" class="text-center p-2 alert-danger">
-                  <div *ngIf="f['tipus_contracte'].errors?.['required']">
-                   Aquest camp és obligatori.
-                  </div>
+            <div *ngIf="f['tipus_contracte'].invalid && (f['tipus_contracte'].dirty || f['tipus_contracte'].touched)" class="text-center p-2 alert-danger">
+              <div *ngIf="f['tipus_contracte'].errors?.['required']">
+                Aquest camp és obligatori.
                 </div>
+              </div>
               <!-- END ERROR-->  
           </div>
       </div>
-      <div class="form-outline col-md-6 mb-4">
+      <div [hidden]="f['tipus'].value === 'fct'" class="form-outline col-md-6 mb-4">
         <label class="form-label">Experiencia Mínima</label>
-        <input type="number" formControlName="experiencia_minima" class="form-control" />
+        <select formControlName="experiencia_minima" class="form-control">
+          <option seleceted disabled value="">Seleccionar l'experiencia mínima</option>
+          <option value="0">No cal</option>
+          <option value="3 mesos">3 mesos</option>
+          <option value="6 mesos">6 mesos</option>
+          <option value="1 any">1 any</option>
+          <option value="2 anys">2 anys</option>
+          <option value="3 anys">3 anys</option>
+          <option value="més de 5 anys">Més de 5 anys</option>
+
+        </select>
           <!--  DIV ERROR-->
           <div *ngIf="f['experiencia_minima'].invalid && (f['experiencia_minima'].dirty || f['experiencia_minima'].touched)" class="text-center p-2 alert-danger">
             <div *ngIf="f['experiencia_minima'].errors?.['required']">
@@ -112,9 +114,30 @@
           </div>
         <!-- END ERROR-->    
       </div>
+    </div>  
+    <div class="row">
+      <div class="col mb-4">
+        <div class="form-outline">
+          <label class="form-label mb-3">Teletreball</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="true" formControlName="teletreball">
+            <label class="form-check-label" for="inlineRadio1">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="false" formControlName="teletreball">
+            <label class="form-check-label">No</label>
+          </div>
+          <!--  DIV ERROR-->
+          <div *ngIf="f['teletreball'].invalid && (f['teletreball'].dirty || f['teletreball'].touched)" class="text-center p-2 alert-danger">
+            <div *ngIf="f['teletreball'].errors?.['required']">
+            Aquest camp és obligatori.
+            </div>
+          </div>
+        <!-- END ERROR-->
+        </div>
+      </div>
     </div>
-  
-    <div class="form-outline mb-4">
+    <div  [hidden]="f['tipus'].value === 'fct'" class="form-outline mb-4">
       <label class="form-label">Estudis Mínim</label>
       <div *ngFor="let curs of dades.cursos" class="form-check">
         <input class="form-check-input" type="checkbox" (change)="onCheckboxChange($event)"  [value]="curs.codi" />
@@ -130,7 +153,15 @@
         </div>
       <!-- END ERROR-->   
     </div>
-  
+    <div [hidden]="f['tipus'].value !== 'fct'">
+      <label class="form-label">Curs</label>
+      <div *ngFor="let curs of dades.cursos" class="form-check">
+        <input class="form-check-input" type="radio" formControlName="estudis_fct"  [value]="curs.codi">
+        <label class="form-check-label">
+          {{curs.codi}} - ({{curs.nom}})
+        </label>
+      </div>
+    </div>
     <div class="d-flex justify-content-center pt-3">
       <button type="submit" class="btn btn-main btn-lg ms-2">Crea el compte</button>
     </div>

@@ -10,6 +10,7 @@ import { SignUpEmpresaComponent } from './sign-up-forms/sign-up-empresa/sign-up-
 import { ConfirmEmailComponent } from './sign-up-forms/confirm-email/confirm-email.component';
 import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contrasenya.component';
 import { CrearOfertaComponent } from './components-empresa/crear-oferta/crear-oferta.component';
+import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
@@ -28,7 +29,9 @@ const routes: Routes = [
   {path: 'profe', component: HomeProfeComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'profe'}},
   {path: 'empresa', component: HomeEmpresaComponent, canActivate:[AuthGuard, RoleGuard], data:{expectedRole: 'empresa'},
     children:[
-      {path: 'crear-oferta', outlet: 'outlet-empresa', component: CrearOfertaComponent}
+      {path: 'crear-oferta', outlet: 'outlet-empresa', component: CrearOfertaComponent},
+      {path: 'llista-oferta', outlet: 'outlet-empresa', component: LlistaOfertesComponent},
+      {path: '', outlet: 'outlet-empresa', component: LlistaOfertesComponent }
     ]
   },
   {path: '', redirectTo: 'login', pathMatch: 'full'}

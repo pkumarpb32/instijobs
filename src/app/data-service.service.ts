@@ -86,4 +86,14 @@ export class DataServiceService {
  changePassword(body : any):Observable<JwtResponseI>{
   return this._http.put<JwtResponseI>(this.url + "/login/canviarpass/password", body);
  }
+
+ // Mètode per inserir una oferta de FCT
+  addFCT(body: any){
+    return this._http.post<any>(this.url + "/fct", body);
+ }
+ // Mètode per inserir una oferta de treball
+ addFeina(body: any){
+  return this._http.post<any>(this.url + "/feina", body);
+}
+
 }
