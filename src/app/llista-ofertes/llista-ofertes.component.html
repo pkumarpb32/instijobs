@@ -2,27 +2,28 @@
   <div class="row m-0">
     <div class="col-md-3 mb-4 mb-md-0">
       <div class="p-3 text-white bg-dark rounded-3" id="filtres">
-        <h2 class="text-center">Filtres</h2>
-          <!-- Filter oferta -->
-        <p>Tipus Oferta</p>
-          <div class="form-check">
-            <input type="radio" class="form-check-input"  name="filter-oferta" value="FCT">
+        <form [formGroup]="FiltersForm" (ngSubmit)="onSubmit()">
+           <!-- Filter oferta -->
+          <h2 class="text-center">Filtres</h2>
+          <div class="container">
+            <button class="btn float-end text-black bg-light mx-0 p-0 px-2 border" type="submit"> Reset </button>
+          </div>
+          <p class="mb-1">Tipus Oferta</p>
+          <div class="form-check mx-3">
+            <input type="radio" class="form-check-input" (change)="filterTipusOferta($event)"  formControlName="filterOferta" value="FCT">
             <label class="form-check-label" >FCT</label>
           </div>
-          <div class="form-check">
-            <input type="radio" class="form-check-input" name="filter-oferta" value="Treball">
+          <div class="form-check mx-3">
+            <input type="radio" class="form-check-input" (change)="filterTipusOferta($event)" formControlName="filterOferta" value="Treball">
             <label class="form-check-label" >Oferta Treball</label>
           </div>
           <!-- Filter Tipus Contracte -->
-        <p>Tipus Contracte</p>
-          <div class="form-check">
-            <input type="radio" class="form-check-input"  name="filter-jornada" value="Jornada Completa">
-            <label class="form-check-label" >Jornada Completa</label>
+        <p  class="mb-1">Tipus Contracte</p>
+          <div *ngFor="let jornada of dades.tipus_contracte" class="form-check mx-3">
+            <input type="radio" class="form-check-input" (change)="filterJornada($event)"  formControlName="filterContracte" [value]="jornada">
+            <label class="form-check-label" >{{jornada}}</label>
           </div>
-          <div class="form-check">
-            <input type="radio" class="form-check-input" name="filter-jornada" value="Indiferent">
-            <label class="form-check-label" >Indiferent</label>
-          </div>
+        </form>
       </div>
     </div>
     <div class="col-md-9">
@@ -31,45 +32,13 @@
           <div class="p-3 rounded-3 bg-primary-custom">
             <h2 class="text-center" id="ofertes">OFERTES </h2>
             <!-- Llista Ofertes -->
-            <div class="border rounded-3 bg-light p-4 pb-0 mb-2">
-              <h3>Oferta 3</h3>
-              <p class="oferta-descripcio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-              </p>
-              <p>Salari</p>
-            </div>
+            <!-- <a [routerLink]="['/activity',{ outlets: {primary: null, activity_router_outlet: 'childb'}}]">/activity/childB</a> -->
 
-            <div class="border rounded-3 bg-light p-4 pb-0 mb-2">
-              <h3>Oferta 3</h3>
-              <p class="oferta-descripcio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-              </p>
-              <p>Salari</p>
-            </div>
-
-            <div class="border rounded-3 bg-light p-4 pb-0 mb-2">
-              <h3>Oferta 3</h3>
-              <p class="oferta-descripcio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-              </p>
-              <p>Salari</p>
-            </div>
-
-            <div class="border rounded-3 bg-light p-4 pb-0 mb-2">
-              <h3>Oferta 3</h3>
-              <p class="oferta-descripcio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-              </p>
-              <p>Salari</p>
-            </div>
-
-            <div class="border rounded-3 bg-light p-4 pb-0 mb-2">
-              <h3>Oferta 3</h3>
-              <p class="oferta-descripcio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining ess</p>
-              <p>Salari</p>
-            </div>
-            
-            
+            <div [routerLink]="['/empresa', {outlets:{ primary: null, 'outlet-empresa': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of dades.ofertes" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+              <h3>{{oferta.titol}}</h3>
+              <p class="oferta-descripcio">{{oferta.descripcio}}</p>
+              <p>{{oferta.salari}}€</p>
+            </div>            
           </div>
         </div>
       </div>

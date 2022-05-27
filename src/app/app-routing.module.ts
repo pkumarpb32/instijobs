@@ -11,6 +11,8 @@ import { ConfirmEmailComponent } from './sign-up-forms/confirm-email/confirm-ema
 import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contrasenya.component';
 import { CrearOfertaComponent } from './components-empresa/crear-oferta/crear-oferta.component';
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
+import { InfoOfertaComponent } from './info-oferta/info-oferta.component';
+import { LlistaOfertesProfeComponent } from './llista-ofertes-profe/llista-ofertes-profe.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
@@ -26,10 +28,17 @@ const routes: Routes = [
     ]
   },
   {path: 'alumne', component: HomeAlumneComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'alumne'}},
-  {path: 'profe', component: HomeProfeComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'profe'}},
+  {path: 'profe', component: HomeProfeComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'profe'},
+    children:[
+      {path: 'crear-oferta', outlet: 'outlet-profe', component: CrearOfertaComponent},
+      {path: 'llista-oferta-profe', outlet: 'outlet-profe', component: LlistaOfertesProfeComponent},
+      {path: '', outlet: 'outlet-profe', component: LlistaOfertesProfeComponent }
+    ]
+  },
   {path: 'empresa', component: HomeEmpresaComponent, canActivate:[AuthGuard, RoleGuard], data:{expectedRole: 'empresa'},
     children:[
       {path: 'crear-oferta', outlet: 'outlet-empresa', component: CrearOfertaComponent},
+      {path: 'info-oferta/:id', outlet: 'outlet-empresa', component: InfoOfertaComponent},
       {path: 'llista-oferta', outlet: 'outlet-empresa', component: LlistaOfertesComponent},
       {path: '', outlet: 'outlet-empresa', component: LlistaOfertesComponent }
     ]

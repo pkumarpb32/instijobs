@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, map, Subject } from 'rxjs';
 import { Curs } from './Classes/Curs';
 import { JwtResponseI } from './Classes/JwtResponseI';
+import { Oferta } from './Classes/Oferta';
 import { Poble } from './Classes/Poble';
 
 @Injectable({
@@ -16,7 +17,10 @@ export class DataServiceService {
   constructor(private _http: HttpClient) { }
   cursos: Curs [] = [];
   pobles: Poble[] = [];
+  ofertes: Oferta[] = [];
   private url: string = "http://localhost:3000/api";
+  jornades: string[] = ['Completa','Indiferent', 'Intensiva', 'Parcial'];
+  tipus_contracte : string[] = ['Indefinit', 'Temporal'];
 
   // Mètode per fer login
   post(url:string, body:any):Observable<JwtResponseI> {{
@@ -51,6 +55,13 @@ export class DataServiceService {
   getPobles(): void{
     this._http.get<Poble[]>(this.url +  "/pobles").subscribe((res: Poble[])=>{
       this.pobles = res;
+    });
+  }
+
+  // Retorna totes les ofertes
+  getOfertas(): void{
+    this._http.get<Oferta[]>(this.url +  "/ofertes").subscribe((res: Oferta[])=>{
+      this.ofertes = res;
     });
   }
 
@@ -96,4 +107,7 @@ export class DataServiceService {
   return this._http.post<any>(this.url + "/feina", body);
 }
 
+  getOfeta(id: number):Observable<Oferta>{
+    return this._http.get<Oferta>(this.url + "/ofertes/" + id);
+  }
 }

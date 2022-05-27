@@ -63,10 +63,14 @@
       <div [hidden]="f['tipus'].value === 'fct'" class="col-md-6 mb-4">
         <div class="form-outline">
           <label class="form-label">Horari</label>
-          <input type="text" formControlName="horari" class="form-control" />
+          <!-- <input type="text" formControlName="horari" class="form-control" /> -->
+          <select formControlName="jornada" class="form-control">
+            <option seleceted disabled value="">Seleccionar la jornada.....</option>
+            <option *ngFor="let jornada of dades.jornades" [value]="jornada">{{jornada}}</option>
+          </select>
           <!--  DIV ERROR-->
-          <div *ngIf="f['horari'].invalid && (f['horari'].dirty || f['horari'].touched)" class="text-center p-2 alert-danger">
-            <div *ngIf="f['horari'].errors?.['required']">
+          <div *ngIf="f['jornada'].invalid && (f['jornada'].dirty || f['jornada'].touched)" class="text-center p-2 alert-danger">
+            <div *ngIf="f['jornada'].errors?.['required']">
              Aquest camp és obligatori.
             </div>
           </div>
@@ -81,8 +85,7 @@
             <label class="form-label">Tipus de Contracte</label>
             <select formControlName="tipus_contracte" class="form-control">
               <option seleceted disabled value="">Seleccionar el tipus de Contracte.....</option>
-              <option value="Indefinit">Indefinit</option>
-              <option value="Temporal">Temporal</option>
+              <option *ngFor="let tipus of dades.tipus_contracte" [value]="tipus">{{tipus}}</option>
             </select>
                 <!--  DIV ERROR-->
             <div *ngIf="f['tipus_contracte'].invalid && (f['tipus_contracte'].dirty || f['tipus_contracte'].touched)" class="text-center p-2 alert-danger">
