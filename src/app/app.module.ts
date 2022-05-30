@@ -22,7 +22,7 @@ import { CanviarContrasenyaComponent } from './canviar-contrasenya/canviar-contr
 import { CrearOfertaComponent } from './components-empresa/crear-oferta/crear-oferta.component';
 import { InfoOfertaComponent } from './info-oferta/info-oferta.component';
 import { LlistaOfertesProfeComponent } from './llista-ofertes-profe/llista-ofertes-profe.component';
-
+import { LlistaAlumnesComponent } from './components-empresa/llista-alumnes/llista-alumnes.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { LlistaOfertesProfeComponent } from './llista-ofertes-profe/llista-ofert
     CanviarContrasenyaComponent,
     CrearOfertaComponent,
     InfoOfertaComponent,
-    LlistaOfertesProfeComponent
+    LlistaOfertesProfeComponent,
+    LlistaAlumnesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<h2 class="text-center mt-3">Llista dels alumnes</h2>
+<div class="container border p-3">
+    <div class="card text-dark bg-light mb-3" *ngFor="let alumne of llista_allumnes">
+        <h5 class="card-header">{{alumne.titol}}</h5>
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{alumne.nom}} {{alumne.cognoms}}</h5>
+          <p class="card-text">Correu: {{alumne.email}}</p>
+        </div>
+      </div>
+</div>

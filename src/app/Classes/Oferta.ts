@@ -11,4 +11,5 @@ export class Oferta {
     nom_empresa: string = "";
     poblacio: string = "";
     adreca: string = "";
+    validat: boolean = false;
 }

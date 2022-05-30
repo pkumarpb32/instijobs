@@ -12,5 +12,12 @@
     <p><b>Adreça: </b>{{oferta.adreca}}, {{oferta.poblacio}}</p>
     <p><b>Nom de l'empresa: </b>{{oferta.nom_empresa}}</p>
     <p><b>Salari: </b>{{oferta.salari}}</p>
+    <div class="text-center" *ngIf="dades.role === 'profe' || dades.role === 'empresa'">
+        <button *ngIf="!oferta.validat && dades.role === 'profe' " (click)="validar()" class="btn btn-main">Validar</button>
+        <button (click)="eliminar()" class="btn btn-main mx-4">Eliminar</button>
+    </div>
+    <div class="text-center" *ngIf="dades.role === 'alumne'">
+        <button (click)="inscriure()" class="btn btn-main mx-4">Inscriure'm a aquesta oferta</button>
+    </div>
 
 </div>

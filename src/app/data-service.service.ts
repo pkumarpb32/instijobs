@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, map, Subject } from 'rxjs';
+import { Alumne } from './Classes/Alumne';
 import { Curs } from './Classes/Curs';
 import { JwtResponseI } from './Classes/JwtResponseI';
 import { Oferta } from './Classes/Oferta';
@@ -10,14 +11,14 @@ import { Poble } from './Classes/Poble';
   providedIn: 'root'
 })
 export class DataServiceService {
-  authSubject = new BehaviorSubject(false);
   private token = " ";
   public email = " ";
   public role = " ";
   constructor(private _http: HttpClient) { }
+  
   cursos: Curs [] = [];
   pobles: Poble[] = [];
-  ofertes: Oferta[] = [];
+  // ofertes: Oferta[] = [];
   private url: string = "http://localhost:3000/api";
   jornades: string[] = ['Completa','Indiferent', 'Intensiva', 'Parcial'];
   tipus_contracte : string[] = ['Indefinit', 'Temporal'];
@@ -58,11 +59,14 @@ export class DataServiceService {
     });
   }
 
+  // getOfertas(): void{
+  //   this._http.get<Oferta[]>(this.url +  "/ofertes").subscribe((res: Oferta[])=>{
+  //     this.ofertes = res;
+  //   });
+  // }
   // Retorna totes les ofertes
-  getOfertas(): void{
-    this._http.get<Oferta[]>(this.url +  "/ofertes").subscribe((res: Oferta[])=>{
-      this.ofertes = res;
-    });
+  getOfertas(): Observable<Oferta[]>{
+    return this._http.get<Oferta[]>(this.url +  "/ofertes");
   }
 
     // Mètode per tancar la sessió
@@ -106,8 +110,28 @@ export class DataServiceService {
  addFeina(body: any){
   return this._http.post<any>(this.url + "/feina", body);
 }
-
+// Mètode per obtenir una oferta
   getOfeta(id: number):Observable<Oferta>{
     return this._http.get<Oferta>(this.url + "/ofertes/" + id);
+  }
+
+  // Mètode per varificar una oferta
+ validarOferta(body: any){
+  return this._http.put<any>(this.url + "/ofertes/validar", body);
+}
+
+  // Mètode per eliminar una oferta
+  eliminarOferta(id: number){
+    return this._http.delete<any>(this.url + "/feina/" + id);
+  }
+
+    // Mètode per eliminar una oferta
+  inscriure(id: number){
+      return this._http.post<any>(this.url + "/feina/inscriure/", {id});
+    }
+
+  // Obtenir llista dels alumnes
+  getLlistaAlumnes():Observable<Alumne[]>{
+    return this._http.get<Alumne[]>(this.url + "/llista_alumnes");
   }
 }

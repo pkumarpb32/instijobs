@@ -32,9 +32,7 @@
           <div class="p-3 rounded-3 bg-primary-custom">
             <h2 class="text-center" id="ofertes">OFERTES </h2>
             <!-- Llista Ofertes -->
-            <!-- <a [routerLink]="['/activity',{ outlets: {primary: null, activity_router_outlet: 'childb'}}]">/activity/childB</a> -->
-
-            <div [routerLink]="['/empresa', {outlets:{ primary: null, 'outlet-empresa': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of dades.ofertes" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+            <div [routerLink]="['/alumne', {outlets:{ primary: null, 'outlet-alumne': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of ofertes" class="border rounded-3 bg-light p-4 pb-0 mb-2">
               <h3>{{oferta.titol}}</h3>
               <p class="oferta-descripcio">{{oferta.descripcio}}</p>
               <p>{{oferta.salari}}€</p>

@@ -1,34 +1,47 @@
+<h2 *ngIf="dades.role === 'empresa'" class="text-center mt-4">LES MEVES OFERTES</h2>
 <div class="m-4">
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="myTab">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link active" data-bs-toggle="tab">Home</a>
+                    <a href="#OfertesPerValidar" class="nav-link active" data-bs-toggle="tab">Ofertes per validar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#profile" class="nav-link" data-bs-toggle="tab">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#messages" class="nav-link" data-bs-toggle="tab">Messages</a>
+                    <a href="#OfertesValidades" class="nav-link" data-bs-toggle="tab">Ofertes Validades</a>
                 </li>
             </ul>
         </div>
         <div class="card-body">
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="home">
-                    <h5 class="card-title">Home tab content</h5>
-                    <p class="card-text">Here is some example text to make up the tab's content. Replace it with your own text anytime.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="tab-content" *ngIf="dades.role === 'profe'">
+                <div class="tab-pane fade show active" id="OfertesPerValidar">
+                    <div [routerLink]="['/profe', {outlets:{ primary: null, 'outlet-profe': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of OfertesNoValidades" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+                        <h3>{{oferta.titol}}</h3>
+                        <p class="oferta-descripcio">{{oferta.descripcio}}</p>
+                        <p>{{oferta.salari}}€</p>
+                      </div> 
                 </div>
-                <div class="tab-pane fade" id="profile">
-                    <h5 class="card-title">Profile tab content</h5>
-                    <p class="card-text">Here is some example text to make up the tab's content. Replace it with your own text anytime.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="tab-pane fade" id="OfertesValidades">
+                    <div [routerLink]="['/profe', {outlets:{ primary: null, 'outlet-profe': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of OfertesValidades" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+                        <h3>{{oferta.titol}}</h3>
+                        <p class="oferta-descripcio">{{oferta.descripcio}}</p>
+                        <p>{{oferta.salari}}€</p>
+                      </div> 
                 </div>
-                <div class="tab-pane fade" id="messages">
-                    <h5 class="card-title">Messages tab content</h5>
-                    <p class="card-text">Here is some example text to make up the tab's content. Replace it with your own text anytime.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="tab-content" *ngIf="dades.role === 'empresa'">
+                <div class="tab-pane fade show active" id="OfertesPerValidar">
+                    <div [routerLink]="['/empresa', {outlets:{ primary: null, 'outlet-empresa': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of OfertesNoValidades" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+                        <h3>{{oferta.titol}}</h3>
+                        <p class="oferta-descripcio">{{oferta.descripcio}}</p>
+                        <p>{{oferta.salari}}€</p>
+                      </div> 
+                </div>
+                <div class="tab-pane fade" id="OfertesValidades">
+                    <div [routerLink]="['/empresa', {outlets:{ primary: null, 'outlet-empresa': ['info-oferta', oferta.id] }}]" *ngFor="let oferta of OfertesValidades" class="border rounded-3 bg-light p-4 pb-0 mb-2">
+                        <h3>{{oferta.titol}}</h3>
+                        <p class="oferta-descripcio">{{oferta.descripcio}}</p>
+                        <p>{{oferta.salari}}€</p>
+                      </div> 
                 </div>
             </div>
         </div>

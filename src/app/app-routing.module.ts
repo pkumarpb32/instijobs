@@ -13,6 +13,7 @@ import { CrearOfertaComponent } from './components-empresa/crear-oferta/crear-of
 import { LlistaOfertesComponent } from './llista-ofertes/llista-ofertes.component';
 import { InfoOfertaComponent } from './info-oferta/info-oferta.component';
 import { LlistaOfertesProfeComponent } from './llista-ofertes-profe/llista-ofertes-profe.component';
+import { LlistaAlumnesComponent } from './components-empresa/llista-alumnes/llista-alumnes.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
@@ -27,11 +28,17 @@ const routes: Routes = [
       {path: '', outlet: 'outlet1', component: SignUpAlumneComponent }
     ]
   },
-  {path: 'alumne', component: HomeAlumneComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'alumne'}},
+  {path: 'alumne', component: HomeAlumneComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'alumne'},
+    children:[
+      {path: 'llista-oferta', outlet: 'outlet-alumne', component: LlistaOfertesComponent },
+      {path: 'info-oferta/:id', outlet: 'outlet-alumne', component: InfoOfertaComponent},
+      {path: '', outlet: 'outlet-alumne', component: LlistaOfertesComponent }
+    ]},
   {path: 'profe', component: HomeProfeComponent, canActivate:[RoleGuard, AuthGuard], data:{expectedRole: 'profe'},
     children:[
-      {path: 'crear-oferta', outlet: 'outlet-profe', component: CrearOfertaComponent},
       {path: 'llista-oferta-profe', outlet: 'outlet-profe', component: LlistaOfertesProfeComponent},
+      {path: 'info-oferta/:id', outlet: 'outlet-profe', component: InfoOfertaComponent},
+      
       {path: '', outlet: 'outlet-profe', component: LlistaOfertesProfeComponent }
     ]
   },
@@ -39,8 +46,9 @@ const routes: Routes = [
     children:[
       {path: 'crear-oferta', outlet: 'outlet-empresa', component: CrearOfertaComponent},
       {path: 'info-oferta/:id', outlet: 'outlet-empresa', component: InfoOfertaComponent},
-      {path: 'llista-oferta', outlet: 'outlet-empresa', component: LlistaOfertesComponent},
-      {path: '', outlet: 'outlet-empresa', component: LlistaOfertesComponent }
+      {path: 'llista-oferta', outlet: 'outlet-empresa', component: LlistaOfertesProfeComponent},
+      {path: 'llista-alumnes', outlet: 'outlet-empresa', component: LlistaAlumnesComponent},
+      {path: '', outlet: 'outlet-empresa', component: LlistaOfertesProfeComponent }
     ]
   },
   {path: '', redirectTo: 'login', pathMatch: 'full'}

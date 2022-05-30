@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Oferta } from '../Classes/Oferta';
 import { DataServiceService } from '../data-service.service';
 
 @Component({
@@ -12,10 +13,13 @@ export class LlistaOfertesComponent implements OnInit {
   FiltersForm!: FormGroup;
   fOferta:string = "";
   fJornada: string = "";
+  ofertes:Oferta[] = [];
   constructor(public dades: DataServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.dades.getOfertas();
+    this.dades.getOfertas().subscribe(res=>{
+      this.ofertes = res;
+    });
     // formulari per filtrar les ofertes
     this.FiltersForm = this.formBuilder.group({
       filterOferta:[''],
@@ -37,7 +41,7 @@ export class LlistaOfertesComponent implements OnInit {
  }
  filterJornada(e:any){
   console.log(e.target.value);
-  this.dades.ofertes = this.dades.ofertes.filter(oferta => oferta.tipus_contracte === e.target.value);
+  // this.dades.ofertes = this.dades.ofertes.filter(oferta => oferta.tipus_contracte === e.target.value);
  }
 
 }
