@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, map, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Alumne } from './Classes/Alumne';
 import { Curs } from './Classes/Curs';
 import { JwtResponseI } from './Classes/JwtResponseI';
@@ -59,11 +59,6 @@ export class DataServiceService {
     });
   }
 
-  // getOfertas(): void{
-  //   this._http.get<Oferta[]>(this.url +  "/ofertes").subscribe((res: Oferta[])=>{
-  //     this.ofertes = res;
-  //   });
-  // }
   // Retorna totes les ofertes
   getOfertas(): Observable<Oferta[]>{
     return this._http.get<Oferta[]>(this.url +  "/ofertes");

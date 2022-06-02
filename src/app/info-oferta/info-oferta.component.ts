@@ -16,9 +16,10 @@ export class InfoOfertaComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe(params => { 
       this.id = params.get('id'); 
-      console.log(this.id);
       this.dades.getOfeta(this.id).subscribe(res=>{
         this.oferta = res;
+        let t = this.oferta.data_publicacio.split("T");
+        this.oferta.data_publicacio = t[0];
       })
   });
   }
